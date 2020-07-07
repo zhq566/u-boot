@@ -13,13 +13,14 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
+#define CUT_UBOOT 0
 /*
  * High Level Configuration Options
  * (easy to change)
  */
 #define CONFIG_S3C24X0		/* This is a SAMSUNG S3C24x0-type SoC */
-#define CONFIG_S3C2410		/* specifically a SAMSUNG S3C2410 SoC */
-#define CONFIG_SMDK2410		/* on a SAMSUNG SMDK2410 Board */
+#define CONFIG_S3C2440		/* specifically a SAMSUNG S3C2440 SoC */
+#define CONFIG_SMDK2440		/* on a SAMSUNG SMDK2410 Board */
 
 #define CONFIG_SYS_TEXT_BASE	0x0
 
@@ -35,10 +36,11 @@
 /*
  * Hardware drivers
  */
+#if CUT_UBOOT
 #define CONFIG_CS8900		/* we have a CS8900 on-board */
 #define CONFIG_CS8900_BASE	0x19000300
 #define CONFIG_CS8900_BUS16	/* the Linux driver does accesses as shorts */
-
+#endif
 /*
  * select serial console configuration
  */
@@ -48,43 +50,53 @@
 /************************************************************
  * USB support (currently only works with D-cache off)
  ************************************************************/
+#if CUT_UBOOT
 #define CONFIG_USB_OHCI
 #define CONFIG_USB_OHCI_S3C24XX
 #define CONFIG_USB_KEYBOARD
 #define CONFIG_DOS_PARTITION
+#endif
 
 /************************************************************
  * RTC
  ************************************************************/
+#if CUT_UBOOT
 #define CONFIG_RTC_S3C24X0
+#endif
 
 #define CONFIG_BAUDRATE		115200
 
 /*
  * BOOTP options
  */
+#if CUT_UBOOT
 #define CONFIG_BOOTP_BOOTFILESIZE
 #define CONFIG_BOOTP_BOOTPATH
 #define CONFIG_BOOTP_GATEWAY
 #define CONFIG_BOOTP_HOSTNAME
+#endif
 
 /*
  * Command line configuration.
  */
+
 #define CONFIG_CMD_BSP
-#define CONFIG_CMD_DATE
+/*#define CONFIG_CMD_DATE*/
 #define CONFIG_CMD_NAND
 #define CONFIG_CMD_REGINFO
 
 #define CONFIG_CMDLINE_EDITING
 
+
 /* autoboot */
 #define CONFIG_BOOT_RETRY_TIME	-1
 #define CONFIG_RESET_TO_RETRY
 
+#if CUT_UBOOT
 #define CONFIG_NETMASK		255.255.255.0
 #define CONFIG_IPADDR		10.0.0.110
 #define CONFIG_SERVERIP		10.0.0.1
+#endif
 
 #if defined(CONFIG_CMD_KGDB)
 #define CONFIG_KGDB_BAUDRATE	115200	/* speed to run kgdb serial port */
@@ -109,9 +121,11 @@
 #define CONFIG_SYS_LOAD_ADDR		0x30800000
 
 /* support additional compression methods */
+#if CUT_UBOOT
 #define CONFIG_BZIP2
 #define CONFIG_LZO
 #define CONFIG_LZMA
+#endif
 
 /*-----------------------------------------------------------------------
  * Physical Memory Map
@@ -166,6 +180,7 @@
 /*
  * File system
  */
+#if CUT_UBOOT
 #define CONFIG_CMD_UBI
 #define CONFIG_CMD_UBIFS
 #define CONFIG_CMD_MTDPARTS
@@ -173,6 +188,7 @@
 #define CONFIG_MTD_PARTITIONS
 #define CONFIG_YAFFS2
 #define CONFIG_RBTREE
+#endif
 
 /* additions for new relocation code, must be added to all boards */
 #define CONFIG_SYS_SDRAM_BASE	PHYS_SDRAM_1
