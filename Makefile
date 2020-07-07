@@ -8,6 +8,8 @@ SUBLEVEL = 01
 EXTRAVERSION =
 NAME =
 
+ARCH=arm 
+CROSS_COMPILE=/home/zhangqing/samba/linaro-7.5.0/bin/arm-linux-gnueabi-
 # *DOCUMENTATION*
 # To see a list of typical targets execute "make help"
 # More info can be located in ./README
@@ -786,6 +788,8 @@ LDFLAGS_u-boot += $(LDFLAGS_FINAL)
 ifneq ($(CONFIG_SYS_TEXT_BASE),)
 LDFLAGS_u-boot += -Ttext $(CONFIG_SYS_TEXT_BASE)
 endif
+
+LDFLAGS_u-boot += $(call ld-option, --no-dynamic-linker)
 
 # Normally we fill empty space with 0xff
 quiet_cmd_objcopy = OBJCOPY $@
