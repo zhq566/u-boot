@@ -16,29 +16,16 @@
 
 DECLARE_GLOBAL_DATA_PTR;
 
-#define FCLK_SPEED 1
-
-#if (FCLK_SPEED == 0)		/* Fout = 203MHz, Fin = 12MHz for Audio */
-#define M_MDIV	0xC3
-#define M_PDIV	0x4
+/* Fout = 400MHz, Fin = 12MHz */
+#define M_MDIV	0x5c
+#define M_PDIV	0x1
 #define M_SDIV	0x1
-#elif (FCLK_SPEED == 1)		/* Fout = 202.8MHz */
-#define M_MDIV	0xA1
-#define M_PDIV	0x3
-#define M_SDIV	0x1
-#endif
 
-#define USB_CLOCK 1
-
-#if (USB_CLOCK == 0)
-#define U_M_MDIV	0xA1
-#define U_M_PDIV	0x3
-#define U_M_SDIV	0x1
-#elif (USB_CLOCK == 1)
-#define U_M_MDIV	0x48
-#define U_M_PDIV	0x3
+/* 48MHz USB */
+#define U_M_MDIV	0x38
+#define U_M_PDIV	0x2
 #define U_M_SDIV	0x2
-#endif
+
 
 static inline void pll_delay(unsigned long loops)
 {
@@ -75,29 +62,15 @@ int board_early_init_f(void)
 	pll_delay(8000);
 
 	/* set up the I/O ports */
-	writel(0x007FFFFF, &gpio->gpacon);
-	writel(0x00044555, &gpio->gpbcon);
-	writel(0x000007FF, &gpio->gpbup);
-	writel(0xAAAAAAAA, &gpio->gpccon);
-	writel(0x0000FFFF, &gpio->gpcup);
-	writel(0xAAAAAAAA, &gpio->gpdcon);
-	writel(0x0000FFFF, &gpio->gpdup);
-	writel(0xAAAAAAAA, &gpio->gpecon);
-	writel(0x0000FFFF, &gpio->gpeup);
-	writel(0x000055AA, &gpio->gpfcon);
-	writel(0x000000FF, &gpio->gpfup);
-	writel(0xFF95FFBA, &gpio->gpgcon);
-	writel(0x0000FFFF, &gpio->gpgup);
-	writel(0x002AFAAA, &gpio->gphcon);
-	writel(0x000007FF, &gpio->gphup);
+    writel(0x002556A9, &gpio->gpbcon);
 
 	return 0;
 }
 
 int board_init(void)
 {
-	/* arch number of SMDK2410-Board */
-	gd->bd->bi_arch_number = MACH_TYPE_SMDK2410;
+	/* arch number of SMDK2440-Board */
+	gd->bd->bi_arch_number = MACH_TYPE_S3C2440;
 
 	/* adress of boot parameters */
 	gd->bd->bi_boot_params = 0x30000100;

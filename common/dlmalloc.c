@@ -607,7 +607,7 @@ void mem_malloc_init(ulong start, ulong size)
 	debug("using memory %#lx-%#lx for malloc()\n", mem_malloc_start,
 	      mem_malloc_end);
 #ifdef CONFIG_SYS_MALLOC_CLEAR_ON_INIT
-	memset((void *)mem_malloc_start, 0x0, size);
+	memset((void *)mem_malloc_start, 0x0, size/2);
 #endif
 	malloc_bin_reloc();
 }

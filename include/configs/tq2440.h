@@ -13,6 +13,7 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
+#define CONFIG_SKIP_LOWLEVEL_INIT 0
 #define CUT_UBOOT 0
 /*
  * High Level Configuration Options
@@ -20,13 +21,13 @@
  */
 #define CONFIG_S3C24X0		/* This is a SAMSUNG S3C24x0-type SoC */
 #define CONFIG_S3C2440		/* specifically a SAMSUNG S3C2440 SoC */
-#define CONFIG_SMDK2440		/* on a SAMSUNG SMDK2410 Board */
+#define CONFIG_TQ2440		/* on a SAMSUNG TQ2440 Board */
 
-#define CONFIG_SYS_TEXT_BASE	0x0
+#define CONFIG_SYS_TEXT_BASE	0x30008000
 
 #define CONFIG_SYS_ARM_CACHE_WRITETHROUGH
 
-/* input clock of PLL (the SMDK2410 has 12MHz input clock) */
+/* input clock of PLL (the SMDK2440 has 12MHz input clock) */
 #define CONFIG_SYS_CLK_FREQ	12000000
 
 #define CONFIG_CMDLINE_TAG	/* enable passing of ATAGs */
