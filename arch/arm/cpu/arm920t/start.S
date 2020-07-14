@@ -83,7 +83,6 @@ copyex:
     ldr   r1, =0x7ff
     ldr   r0, =INTSUBMSK
     str   r1, [r0]
-
 #endif
 
 	/* FCLK:HCLK:PCLK = 1:4:8 */
@@ -91,6 +90,12 @@ copyex:
 	ldr	r0, =CLKDIVN
 	mov	r1, #5
 	str	r1, [r0]
+#if defined(CONFIG_S3C2440)
+    /* MMU_SetAsyncBusMode s3c2440 not sup SyncBusMode */
+    mrc p15,0,r0,c1,c0,0
+    orr r0,r0,0xc0000000
+    mcr p15,0,r0,c1,c0,0
+#endif
 
 #endif	/* CONFIG_S3C24X0 */
 

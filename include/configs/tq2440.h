@@ -13,7 +13,10 @@
 #ifndef __CONFIG_H
 #define __CONFIG_H
 
-#define CONFIG_SKIP_LOWLEVEL_INIT 0
+#ifndef CONFIG_SPL
+#define CONFIG_SKIP_LOWLEVEL_INIT 1
+#endif
+
 #define CUT_UBOOT 0
 /*
  * High Level Configuration Options
