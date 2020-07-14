@@ -80,9 +80,9 @@ copyex:
 	str	r1, [r0]
 #endif
 #if defined(CONFIG_S3C2440)
-    ldr   r1, =0x7ff
-    ldr   r0, =INTSUBMSK
-    str   r1, [r0]
+	ldr   r1, =0x7ff
+	ldr   r0, =INTSUBMSK
+	str   r1, [r0]
 #endif
 
 	/* FCLK:HCLK:PCLK = 1:4:8 */
@@ -92,23 +92,23 @@ copyex:
 	str	r1, [r0]
 	
 #if defined(CONFIG_S3C2440)
-    /* MMU_SetAsyncBusMode s3c2440 not sup SyncBusMode */
-    mrc p15,0,r0,c1,c0,0
-    orr r0,r0,0xc0000000
-    mcr p15,0,r0,c1,c0,0
+	/* MMU_SetAsyncBusMode s3c2440 not sup SyncBusMode */
+	mrc	p15,0,r0,c1,c0,0
+	orr	r0, r0, #0xc0000000
+	mcr	p15,0,r0,c1,c0,0
 
 #define MPLLCON 0x4c000004
 #define S3C2440_MPLL_400MHZ	((0x5c<<12)|(0x01<<4)|(0x01))
 
-    /* MPLLCON = s3c2440_MPLL_400MHZ */
-    ldr r0, =MPLLCON
-    ldr r1, =S3C2440_MPLL_400MHZ
-    str r1, [r0]
-    
-    /* 启动ICACHE */
-    mrc p15, 0, r0, c1, c0, 0    /* read control reg */
-    orr r0, r0, #(1<<12)
-    mcr p15, 0, r0, c1, c0, 0    /* write it back */
+	/* MPLLCON = s3c2440_MPLL_400MHZ */
+	ldr	r0, =MPLLCON
+	ldr	r1, =S3C2440_MPLL_400MHZ
+	str	r1, [r0]
+	
+	/* 启动ICACHE */
+	mrc	p15, 0, r0, c1, c0, 0	/* read control reg */
+	orr	r0, r0, #(1<<12)
+	mcr	p15, 0, r0, c1, c0, 0	/* write it back */
 
 #endif
 

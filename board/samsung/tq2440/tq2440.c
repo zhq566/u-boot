@@ -44,15 +44,6 @@ int board_early_init_f(void)
 					s3c24x0_get_base_clock_power();
 	struct s3c24x0_gpio * const gpio = s3c24x0_get_base_gpio();
 
-#ifdef S3C2440_DEL
-	/* to reduce PLL lock time, adjust the LOCKTIME register */
-	writel(0xFFFFFF, &clk_power->locktime);
-
-	/* configure MPLL */
-	writel((M_MDIV << 12) + (M_PDIV << 4) + M_SDIV,
-	       &clk_power->mpllcon);
-#endif
-
 	/* some delay between MPLL and UPLL */
 	pll_delay(4000);
 
