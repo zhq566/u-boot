@@ -55,24 +55,25 @@ int board_early_init_f(void)
 	pll_delay(8000);
 
 	/* set up the I/O ports */ /* tq2440 */
-    writel(&gpio->gpacon = 0x007FFFFF);
-    writel(&gpio->gpbcon = 0x00055555);
-    writel(&gpio->gpbup = 0x000007FF);
-    writel(&gpio->gpccon = 0xAAAAAAAA);
-    writel(&gpio->gpcup = 0x0000FFFF);
-    writel(&gpio->gpdcon = 0xAAAAAAAA);
-    writel(&gpio->gpdup = 0x0000FFFF);
-    writel(&gpio->gpecon = 0xAAAAAAAA);
-    writel(&gpio->gpeup = 0x0000FFFF);
-    writel(&gpio->gpfcon = 0x000055AA);
-    writel(&gpio->gpfup = 0x000000FF);
-    writel(&gpio->gpgcon = 0xFF94FFBA);
-    writel(&gpio->gpgup = 0x0000FFEF);
-    writel(&gpio->gpgdat = &gpio->gpgdat & ((~(1<<4)) | (1<<4)) );
-    writel(&gpio->gphcon = 0x002AFAAA);
-    writel(&gpio->gphup = 0x000007FF);
-    writel(&gpio->gpjcon = 0x02aaaaaa);
-    writel(&gpio->gpjup = 0x00001fff);
+    writel(0x007FFFFF, &gpio->gpacon);
+    writel(0x00055555, &gpio->gpbcon);
+    writel(0x000007FF, &gpio->gpbup);
+    writel(0xAAAAAAAA, &gpio->gpccon);
+    writel(0x0000FFFF, &gpio->gpcup);
+    writel(0xAAAAAAAA, &gpio->gpdcon);
+    writel(0x0000FFFF, &gpio->gpdup);
+    writel(0xAAAAAAAA, &gpio->gpecon);
+    writel(0x0000FFFF, &gpio->gpeup);
+    writel(0x000055AA, &gpio->gpfcon);
+    writel(0x000000FF, &gpio->gpfup);
+    writel(0xFF94FFBA, &gpio->gpgcon);
+    writel(0x0000FFEF, &gpio->gpgup);
+    writel((gpio->gpgdat & ((~(1<<4)) | (1<<4))), &gpio->gpgdat);
+    writel(0x002AFAAA, &gpio->gphcon);
+    writel(0x000007FF, &gpio->gphup);
+    writel(0x02aaaaaa, &gpio->gpjcon);
+    writel(0x00001fff, &gpio->gpjup);
+
 
 	return 0;
 }
