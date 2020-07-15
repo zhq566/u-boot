@@ -801,7 +801,7 @@ init_fnc_t init_sequence_r[] = {
 	efi_memory_init,
 #endif
 	stdio_init_tables,
-	initr_serial,
+	initr_serial,          /* record: init serial */
 	initr_announce,
 	INIT_FUNC_WATCHDOG_RESET
 #ifdef CONFIG_NEEDS_MANUAL_RELOC

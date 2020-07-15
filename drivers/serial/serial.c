@@ -109,52 +109,7 @@ U_BOOT_ENV_CALLBACK(baudrate, on_baudrate);
 	void name(void)						\
 		__attribute__((weak, alias("serial_null")));
 
-serial_initfunc(amirix_serial_initialize);
-serial_initfunc(arc_serial_initialize);
-serial_initfunc(arm_dcc_initialize);
-serial_initfunc(asc_serial_initialize);
-serial_initfunc(atmel_serial_initialize);
-serial_initfunc(au1x00_serial_initialize);
-serial_initfunc(bfin_jtag_initialize);
-serial_initfunc(bfin_serial_initialize);
-serial_initfunc(bmw_serial_initialize);
-serial_initfunc(clps7111_serial_initialize);
-serial_initfunc(cogent_serial_initialize);
-serial_initfunc(cpci750_serial_initialize);
-serial_initfunc(evb64260_serial_initialize);
-serial_initfunc(imx_serial_initialize);
-serial_initfunc(iop480_serial_initialize);
-serial_initfunc(jz_serial_initialize);
-serial_initfunc(leon2_serial_initialize);
-serial_initfunc(leon3_serial_initialize);
-serial_initfunc(lh7a40x_serial_initialize);
-serial_initfunc(lpc32xx_serial_initialize);
-serial_initfunc(marvell_serial_initialize);
-serial_initfunc(max3100_serial_initialize);
-serial_initfunc(mcf_serial_initialize);
-serial_initfunc(ml2_serial_initialize);
-serial_initfunc(mpc512x_serial_initialize);
-serial_initfunc(mpc5xx_serial_initialize);
-serial_initfunc(mpc8260_scc_serial_initialize);
-serial_initfunc(mpc8260_smc_serial_initialize);
-serial_initfunc(mpc85xx_serial_initialize);
-serial_initfunc(mpc8xx_serial_initialize);
-serial_initfunc(mxc_serial_initialize);
-serial_initfunc(mxs_auart_initialize);
-serial_initfunc(ns16550_serial_initialize);
-serial_initfunc(oc_serial_initialize);
-serial_initfunc(p3mx_serial_initialize);
-serial_initfunc(pl01x_serial_initialize);
-serial_initfunc(pxa_serial_initialize);
 serial_initfunc(s3c24xx_serial_initialize);
-serial_initfunc(s5p_serial_initialize);
-serial_initfunc(sa1100_serial_initialize);
-serial_initfunc(sandbox_serial_initialize);
-serial_initfunc(sconsole_serial_initialize);
-serial_initfunc(sh_serial_initialize);
-serial_initfunc(stm32_serial_initialize);
-serial_initfunc(uartlite_serial_initialize);
-serial_initfunc(zynq_serial_initialize);
 
 /**
  * serial_register() - Register serial driver with serial driver core
