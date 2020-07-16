@@ -82,9 +82,27 @@ ENTRY(_main)
 #else
 	bic	sp, sp, #7	/* 8-byte alignment for ABI compliance */
 #endif
+
+#ifndef CONFIG_START_NAND
 	mov	r0, sp
 	bl	board_init_f_alloc_reserve
 	mov	sp, r0
+#else
+   bl nand_init_ll
+   mov r0, #0
+   ldr r1, =_start
+   ldr r2, =__bss_start
+   sub r2, r2, r1
+   ldr r1, =CONFIG_SYS_TEXT_BASE
+   bl copy_code_to_sdram
+   bl clear_bss
+   ldr pc, =START_ON_RAM          //start run on RAM
+
+START_ON_RAM:
+   mov r0, sp
+   bl  board_init_f_alloc_reserve
+   mov sp, r0
+#endif
 	/* set up gd here, outside any C code */
 	mov	r9, r0
 	bl	board_init_f_init_reserve
@@ -118,26 +136,36 @@ ENTRY(_main)
 	orr	lr, #1				/* As required by Thumb-only */
 #endif
 	ldr	r0, [r9, #GD_RELOCADDR]		/* r0 = gd->relocaddr */
+#ifndef CONFIG_START_NAND
 	b	relocate_code
+#else
+   ldr r2, =__rel_dyn_start
+   ldr r3, =__rel_dyn_end
+#endif
 here:
 /*
  * now relocate vectors
  */
-
+#ifndef CONFIG_START_NAND
 	bl	relocate_vectors
 
 /* Set up final (full) environment */
 
 	bl	c_runtime_cpu_setup	/* we still call old routine here */
 #endif
+
+#endif
+
 #if !defined(CONFIG_SPL_BUILD) || defined(CONFIG_SPL_FRAMEWORK)
-# ifdef CONFIG_SPL_BUILD
+#ifdef CONFIG_SPL_BUILD
 	/* Use a DRAM stack for the rest of SPL, if requested */
 	bl	spl_relocate_stack_gd
 	cmp	r0, #0
 	movne	sp, r0
 	movne	r9, r0
-# endif
+#endif
+
+#ifndef CONFIG_START_NAND
 	ldr	r0, =__bss_start	/* this is auto-relocated! */
 
 #ifdef CONFIG_USE_ARCH_MEMSET
@@ -157,6 +185,7 @@ clbss_l:cmp	r0, r1			/* while not at end of BSS */
 	strlo	r2, [r0]		/* clear 32-bit BSS word */
 	addlo	r0, r0, #4		/* move to next */
 	blo	clbss_l
+#endif
 #endif
 
 #if ! defined(CONFIG_SPL_BUILD)

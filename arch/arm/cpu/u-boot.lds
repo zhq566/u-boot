@@ -43,7 +43,11 @@ SECTIONS
 	{
 		*(.__image_copy_start)
 		*(.vectors)
-		CPUDIR/start.o (.text*)
+#ifdef CONFIG_START_NAND
+        arch/arm/lib/crt0.o (.text*)
+        arch/arm/lib/vectors.o (.text*)
+        board/samsung/tq2440/built-in.o (.text*)
+#endif
 		*(.text*)
 	}
 

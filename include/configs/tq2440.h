@@ -118,7 +118,11 @@
 #define CONFIG_SYS_MEMTEST_START	0x30000000	/* memtest works on */
 #define CONFIG_SYS_MEMTEST_END		0x33F00000	/* 63 MB in DRAM */
 
-#define CONFIG_SYS_LOAD_ADDR		0x30800000 /* Not Auto startup */
+#ifndef CONFIG_START_NAND
+#define CONFIG_SYS_LOAD_ADDR		0x00000000 /* startup from nor */
+#else
+#define CONFIG_SYS_LOAD_ADDR		0x33f00000 /* startup from nand */
+#endif
 
 /* support additional compression methods */ /* Not Auto startup */
 #if CUT_UBOOT

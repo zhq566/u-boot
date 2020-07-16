@@ -7,3 +7,7 @@
 
 obj-y	:= tq2440.o
 obj-y	+= lowlevel_init.o
+
+ifdef CONFIG_START_NAND
+obj-y	+= init.o
+endif
