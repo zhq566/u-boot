@@ -16,7 +16,7 @@ obj-y	+= crt0_64.o
 else
 
 ifdef CONFIG_START_NAND
-+extra-y    += vectors.o crt0.o
+extra-y    += vectors.o crt0.o
 else
 obj-y	+= vectors.o crt0.o
 endif

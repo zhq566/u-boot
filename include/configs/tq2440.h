@@ -22,7 +22,11 @@
 #define CONFIG_S3C2440		/* specifically a SAMSUNG S3C2440 SoC */
 #define CONFIG_TQ2440		/* on a SAMSUNG TQ2440 Board */
 
-#define CONFIG_SYS_TEXT_BASE	0x0
+#ifndef CONFIG_START_NAND
+#define CONFIG_SYS_TEXT_BASE	0x00000000 /* startup from nor */
+#else
+#define CONFIG_SYS_TEXT_BASE	0x33f00000 /* startup from nor */
+#endif
 
 #define CONFIG_SYS_ARM_CACHE_WRITETHROUGH
 
@@ -118,11 +122,7 @@
 #define CONFIG_SYS_MEMTEST_START	0x30000000	/* memtest works on */
 #define CONFIG_SYS_MEMTEST_END		0x33F00000	/* 63 MB in DRAM */
 
-#ifndef CONFIG_START_NAND
-#define CONFIG_SYS_LOAD_ADDR		0x00000000 /* startup from nor */
-#else
-#define CONFIG_SYS_LOAD_ADDR		0x33f00000 /* startup from nand */
-#endif
+#define CONFIG_SYS_LOAD_ADDR		0x30800000 /* startup from nand */
 
 /* support additional compression methods */ /* Not Auto startup */
 #if CUT_UBOOT

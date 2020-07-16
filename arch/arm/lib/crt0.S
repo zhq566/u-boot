@@ -109,6 +109,7 @@ START_ON_RAM:
 
 	mov	r0, #0
 	bl	board_init_f
+	str r1, [r0]
 
 #if ! defined(CONFIG_SPL_BUILD)
 

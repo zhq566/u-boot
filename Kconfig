@@ -44,6 +44,14 @@ config LOCALVERSION_AUTO
 
 	  which is done within the script "scripts/setlocalversion".)
 
+config START_NAND
+	bool "chose nand startup"
+	default y
+	help
+	  nand startup don't need define in xx_config.h
+
+	  This option is enabled by default for U-Boot.
+
 config CC_OPTIMIZE_FOR_SIZE
 	bool "Optimize for size"
 	default y
