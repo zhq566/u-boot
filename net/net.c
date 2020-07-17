@@ -1435,7 +1435,7 @@ void net_set_ip_header(uchar *pkt, struct in_addr dest, struct in_addr source)
 	ip->ip_hl_v  = 0x45;
 	ip->ip_tos   = 0;
 	ip->ip_len   = htons(IP_HDR_SIZE);
-	ip->ip_id    = htons(net_ip_id++);
+	ip->ip_id    = htons(net_ip_id);
 	ip->ip_off   = htons(IP_FLAGS_DFRAG);	/* Don't fragment */
 	ip->ip_ttl   = 255;
 	ip->ip_sum   = 0;

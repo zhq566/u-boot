@@ -368,8 +368,8 @@ static int dm9000_init(struct eth_device *dev, bd_t *bd)
 		udelay(1000);
 		i++;
 		if (i == 10000) {
-			printf("could not establish link\n");
-			return 0;
+			//printf("could not establish link\n");
+			//return 0;
 		}
 	}
 
@@ -557,6 +557,15 @@ static void dm9000_get_enetaddr(struct eth_device *dev)
 	int i;
 	for (i = 0; i < 3; i++)
 		dm9000_read_srom_word(i, dev->enetaddr + (2 * i));
+#else
+	unsigned char addr[6] = {
+		0xca,0xb9,0xd0,
+		0x4e,0x3a,0x4c,
+	};
+	int i;
+	for(i = 0; i < 6; i++) {
+		dev->enetaddr[i] = addr[i];
+	}
 #endif
 }
 
@@ -622,7 +631,6 @@ dm9000_phy_write(int reg, u16 value)
 int dm9000_initialize(bd_t *bis)
 {
 	struct eth_device *dev = &(dm9000_info.netdev);
-
 	/* Load MAC address from EEPROM */
 	dm9000_get_enetaddr(dev);
 
